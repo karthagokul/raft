@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,7 +30,9 @@ SOURCES += \
     canwrapper.cpp \
     addnodedialog.cpp \
     removenodedialog.cpp \
-    configurenodedialog.cpp
+    configurenodedialog.cpp \
+    utils.cpp \
+    canbuscontroller.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +40,9 @@ HEADERS += \
     canwrapper.h \
     addnodedialog.h \
     removenodedialog.h \
-    configurenodedialog.h
+    configurenodedialog.h \
+    utils.h \
+    canbuscontroller.h
 
 FORMS += \
         mainwindow.ui \

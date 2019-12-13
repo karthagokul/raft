@@ -143,7 +143,7 @@
     <property name="title">
      <string>CAN Buses</string>
     </property>
-    <widget class="QListView" name="listView">
+    <widget class="QListView" name="canInterfacesListView">
      <property name="geometry">
       <rect>
        <x>10</x>

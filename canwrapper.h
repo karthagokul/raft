@@ -1,4 +1,4 @@
-// Copyright 2012 CrossControl
+// MIT License (c)  2012 CrossControl
 
 #ifndef CANWRAPPER_H
 #define CANWRAPPER_H
