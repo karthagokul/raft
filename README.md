@@ -4,6 +4,7 @@ can analyzer
 ## Installation
 
 Go to your ubuntu box and run the below command to enable a vcan0 interface
+
 sudo apt-get install can-utils
 
 sudo modprobe vcan
