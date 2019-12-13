@@ -27,12 +27,21 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     canworkerthread.cpp \
-    canwrapper.cpp
+    canwrapper.cpp \
+    addnodedialog.cpp \
+    removenodedialog.cpp \
+    configurenodedialog.cpp
 
 HEADERS += \
         mainwindow.h \
     canworkerthread.h \
-    canwrapper.h
+    canwrapper.h \
+    addnodedialog.h \
+    removenodedialog.h \
+    configurenodedialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    addnodedialog.ui \
+    removenodedialog.ui \
+    configurenodedialog.ui
