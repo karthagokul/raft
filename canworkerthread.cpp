@@ -34,6 +34,7 @@ IN THE SOFTWARE.
 #include <stdio.h>
 
 #include <sys/time.h>
+#include <QDateTime>
 
 CanWorkerThread::CanWorkerThread(QObject *parent) :
     QThread(parent)
@@ -82,43 +83,45 @@ void CanWorkerThread::run()
                 string = QString("Error frame received, class = " +  QString::number(msg.can_id)).toUpper();
             }
             else
-            if(extended)   // Extended frame
-            {
-                if(rtr)
+                if(extended)   // Extended frame
                 {
-                    string = QString("RTR ID: %1 LENGTH: %2").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
-                }
-                else
-                {
-                    string = QString("ID: %1 LENGTH: %2 DATA: ").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
-
-                    for(i = 0; i < msg.can_dlc; i++)
+                    if(rtr)
                     {
-                        string.append(QString::number(msg.data[i],16) .toUpper()+ " ");
+                        string = QString("RTR ID: %1 LENGTH: %2").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
+                    }
+                    else
+                    {
+                        string = QString("ID: %1 LENGTH: %2 DATA: ").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
+
+                        for(i = 0; i < msg.can_dlc; i++)
+                        {
+                            string.append(QString::number(msg.data[i],16) .toUpper()+ " ");
+                        }
                     }
                 }
-            }
-            else    // Standard frame
-            {
-                if(rtr)
+                else    // Standard frame
                 {
-                    string = QString("RTR ID: %1 LENGTH: %2").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
-                }
-                else
-                {
-                    string = QString("ID: %1 LENGTH: %2 DATA: ").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
-
-                    for(i = 0; i < msg.can_dlc; i++)
+                    if(rtr)
                     {
-                        string.append(QString::number(msg.data[i],16).toUpper()+ " ");
+                        string = QString("RTR ID: %1 LENGTH: %2").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
+                    }
+                    else
+                    {
+                        string = QString("ID: %1 LENGTH: %2 DATA: ").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
+
+                        for(i = 0; i < msg.can_dlc; i++)
+                        {
+                            string.append(QString::number(msg.data[i],16).toUpper()+ " ");
+                        }
                     }
                 }
-             }
 
             // Send string to GUI
             // Because this is an own thread, we must emit a signal rater than making a direct call
             // Because we are in a different thread than the GUI thread, this will put the data onto a queue
             // And will be processed by the GUI thread
+            //a bit loaded
+            string.prepend(QDateTime::currentDateTime().toString("hh:mm:ss:zzz")+" ");
             emit msgReceived(string);
         }
         else
@@ -126,7 +129,8 @@ void CanWorkerThread::run()
             if(errorCode)
             {
                 QString string = QString("Error detected, errorcode: " + QString::number(errorCode));
-
+                //a bit loaded
+                string.prepend(QDateTime::currentDateTime().toString("hh:mm:ss:zzz")+" ");
                 emit msgReceived(string);
             }
         }
