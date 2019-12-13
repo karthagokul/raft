@@ -12,7 +12,38 @@ IN THE SOFTWARE.
 */
 #include "canbuscontroller.h"
 
+#include <QMessageBox>
+
 CanBusController::CanBusController()
 {
+    interface=new CanWrapper();
+}
 
+bool CanBusController::load()
+{
+    int ret,errorCode;
+    ret = interface->Init("vcan0", errorCode);
+    if(!ret)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Could not initialize CAN net. Error code: " + QString::number(errorCode));
+        msgBox.exec();
+
+        return false;
+    }
+
+    // Enable error messages to be reported
+    interface->EnableErrorMessages();
+
+    // initialize worker thread
+    Init(interface);
+
+    // Start thread
+    start();
+    return true;
+}
+
+bool CanBusController::unload()
+{
+    return true;
 }

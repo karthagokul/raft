@@ -13,11 +13,18 @@ IN THE SOFTWARE.
 #ifndef CANBUSCONTROLLER_H
 #define CANBUSCONTROLLER_H
 
+#include "canworkerthread.h"
+#include "canwrapper.h"
 
-class CanBusController
+class CanBusController:public CanWorkerThread
 {
 public:
     CanBusController();
+    bool load();
+    bool unload();
+
+private:
+   CanWrapper *interface;
 };
 
 #endif // CANBUSCONTROLLER_H

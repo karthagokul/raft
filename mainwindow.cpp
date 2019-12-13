@@ -16,6 +16,7 @@ IN THE SOFTWARE.
 #include "utils.h"
 #include <QDebug>
 #include <QStringListModel>
+#include "canbuscontroller.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,6 +25,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setUpCanInterfaceUi();
 
+    //temporary to check
+    CanBusController *c=new CanBusController();
+    connect(c,SIGNAL(msgReceived(QString)),this,SLOT(onMessageTemp(QString)));
+    c->load();
+
+}
+
+void MainWindow::onMessageTemp(QString message)
+{
+    ui->canLogView->append(message);
 }
 
 void MainWindow::setUpCanInterfaceUi()

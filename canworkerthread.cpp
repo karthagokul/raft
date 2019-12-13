@@ -79,22 +79,22 @@ void CanWorkerThread::run()
 
             if(error)   // Error frame
             {
-                string = QString("Error frame received, class = " +  QString::number(msg.can_id));
+                string = QString("Error frame received, class = " +  QString::number(msg.can_id)).toUpper();
             }
             else
             if(extended)   // Extended frame
             {
                 if(rtr)
                 {
-                    string = QString("RTR ID: %1 LENGTH: %2").arg(msg.can_id).arg(msg.can_dlc);
+                    string = QString("RTR ID: %1 LENGTH: %2").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
                 }
                 else
                 {
-                    string = QString("ID: %1 LENGTH: %2 DATA: ").arg(msg.can_id).arg(msg.can_dlc);
+                    string = QString("ID: %1 LENGTH: %2 DATA: ").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
 
                     for(i = 0; i < msg.can_dlc; i++)
                     {
-                        string.append(QString::number(msg.data[i]) + " ");
+                        string.append(QString::number(msg.data[i],16) .toUpper()+ " ");
                     }
                 }
             }
@@ -102,15 +102,15 @@ void CanWorkerThread::run()
             {
                 if(rtr)
                 {
-                    string = QString("RTR ID: %1 LENGTH: %2").arg(msg.can_id).arg(msg.can_dlc);
+                    string = QString("RTR ID: %1 LENGTH: %2").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
                 }
                 else
                 {
-                    string = QString("ID: %1 LENGTH: %2 DATA: ").arg(msg.can_id).arg(msg.can_dlc);
+                    string = QString("ID: %1 LENGTH: %2 DATA: ").arg(QString::number(msg.can_id,16)).arg(msg.can_dlc).toUpper();
 
                     for(i = 0; i < msg.can_dlc; i++)
                     {
-                        string.append(QString::number(msg.data[i]) + " ");
+                        string.append(QString::number(msg.data[i],16).toUpper()+ " ");
                     }
                 }
              }
