@@ -1,4 +1,4 @@
-![](https://github.com/karthagokul/raft/blob/main/logo.png?raw=true)
+![](https://github.com/karthagokul/raft/blob/master/logo.png?raw=true)
 
 
 
